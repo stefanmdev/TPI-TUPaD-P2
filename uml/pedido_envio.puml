@@ -1,0 +1,63 @@
+@startuml
+title Modelo Pedido - Envío (1 → 1)
+
+class Pedido {
+  - Long id
+  - String numero
+  - LocalDate fecha
+  - String clienteNombre
+  - Double total
+  - EstadoPedido estado
+  - boolean eliminado
+
+  + Long getId()
+  + String getNumero()
+  + LocalDate getFecha()
+  + String getClienteNombre()
+  + Double getTotal()
+  + EstadoPedido getEstado()
+  + boolean isEliminado()
+}
+
+enum EstadoPedido {
+  NUEVO
+  FACTURADO
+  ENVIADO
+}
+
+class Envio {
+  - Long id
+  - String tracking
+  - String empresa
+  - TipoEnvio tipo
+  - Double costo
+  - LocalDate fechaDespacho
+  - LocalDate fechaEstimada
+  - EstadoEnvio estado
+  - boolean eliminado
+
+  + Long getId()
+  + String getTracking()
+  + String getEmpresa()
+  + TipoEnvio getTipo()
+  + Double getCosto()
+  + LocalDate getFechaDespacho()
+  + LocalDate getFechaEstimada()
+  + EstadoEnvio getEstado()
+  + boolean isEliminado()
+}
+
+enum TipoEnvio {
+  ESTANDAR
+  EXPRES
+}
+
+enum EstadoEnvio {
+  EN_TRANSITO
+  EN_PREPARACION
+  ENTREGADO
+}
+
+Pedido "1" --> "1" Envio : tiene →
+@enduml
+
