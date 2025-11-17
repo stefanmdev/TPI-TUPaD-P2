@@ -1,3 +1,4 @@
+-- Script preparado por Joaquin Villarruel
 CREATE DATABASE IF NOT EXISTS tp_p2_pedido_envio
   CHARACTER SET utf8mb4
   COLLATE utf8mb4_unicode_ci;
