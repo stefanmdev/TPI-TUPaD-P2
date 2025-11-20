@@ -1,5 +1,5 @@
 # TPI – Programación II  
-## Sistema Pedido → Envío (Relación 1 → 1)  
+## 📦 Sistema Pedido → Envío (Relación 1 → 1)  
 **UTN – Tecnicatura Universitaria en Programación a Distancia**  
 **Comisión 8 – Año 2025**
 
@@ -8,183 +8,137 @@
 ## 📌 1. Descripción del dominio  
 El proyecto implementa un **sistema de gestión de Pedidos y Envíos**, donde cada *Pedido* puede tener **un único Envío asociado** (relación **1 → 1 unidireccional**).
 
-- **Pedido** incluye número, fecha, cliente, total, estado y baja lógica.  
-- **Envío** incluye tracking, empresa, tipo, costo, fechas y estado.  
-- La relación se garantiza mediante una **FK única en `envio.pedido_id`**.
+- 📄 **Pedido**: número, fecha, cliente, total, estado, baja lógica.  
+- 📦 **Envío**: tracking, empresa, tipo, costo, fechas, estado.  
+- 🔗 Relación garantizada mediante **FK UNIQUE** en `envio.pedido_id`.
 
-Este trabajo integra conceptos de Programación II y Bases de Datos I aplicando:
-- POO  
-- JDBC  
-- Patrón DAO  
-- Transacciones (commit / rollback)  
-- Validaciones  
-- Arquitectura por capas  
-- Manejo de excepciones  
+Incluye conceptos de Programación II y BD I:
+
+- 🧱 POO  
+- 🛢️ JDBC + PreparedStatement  
+- 🧩 Patrón DAO  
+- 🔄 Transacciones (commit / rollback)  
+- 🛡️ Validaciones  
+- 🏛️ Arquitectura por capas  
+- ⚠️ Manejo de excepciones  
 
 ---
 
 ## 📌 2. Requisitos del proyecto  
 ### ✔ Software necesario
-- **Java 21** (o versión compatible)
-- **NetBeans 18+ o 19+**
-- **MySQL 8**
-- **MySQL Connector/J 9.0+**
-- **Git** (para clonar el repositorio)
+- Java 21  
+- NetBeans 18+  
+- MySQL 8  
+- MySQL Connector/J 9+  
+- Git  
 
 ---
 
-## 📌 3. Cómo crear la base de datos  
-Dentro del repositorio vas a encontrar la carpeta:
+## 📌 3. Creación de la base de datos  
 
+Carpeta del repositorio:  
+
+```
 /sql
 ├── 01_create_database.sql
 └── 02_insert_data.sql
+```
 
+### ▶️ Crear base  
+1. Abrir **01_create_database.sql**  
+2. Ejecutar todo  
+3. Verificar BD: `tp_p2_pedido_envio`
 
-### ▶ Crear la base  
-Ejecutar en MySQL Workbench:
-
-1. Abrir **01_create_database.sql**
-2. Ejecutar todo el script (icono ⚡)
-3. Verificar que se creó la BD: `tp_p2_pedido_envio`
-
-### ▶ Insertar datos de prueba  
-Ejecutar **02_insert_data.sql** de la misma forma.
-
-La BD quedará con:
-- 3 pedidos base  
-- 3 envíos base  
-- Relación 1 → 1 garantizada  
+### ▶️ Insertar datos de prueba  
+Ejecutar **02_insert_data.sql**.
 
 ---
 
-## 📌 4. Cómo compilar y ejecutar el sistema  
-### ✔ 1. Clonar el repositorio  
+## 📌 4. Cómo compilar y ejecutar  
+### ✔ Clonar el repositorio
+```bash
 git clone https://github.com/stefanmdev/TPI-TUPaD-P2.git
+```
 
+### ✔ Importar en NetBeans  
+File → Open Project.
 
-### ✔ 2. Importar en NetBeans
-- File → Open Project  
-- Seleccionar la carpeta del proyecto
+### ✔ Verificar dependencias  
+Debe existir en *Libraries*:  
+`mysql-connector-j-9.x.x.jar`
 
-### ✔ 3. Verificar dependencias
-En *Libraries* debe aparecer:
-
-mysql-connector-j-9.0.x.jar
-
-
-Si no está:
-1. Click derecho en Libraries → Add JAR/Folder  
-2. Seleccionar el conector  
-
-### ✔ 4. Ejecutar  
-Run → Run Project (F6)
+### ✔ Ejecutar  
+Run Project (F6)
 
 ---
 
 ## 📌 5. Credenciales de conexión  
-Configurar en:
-
-`src/config/DatabaseConnection.java`
-
-Valores utilizados:
+Archivo: `src/config/DatabaseConnection.java`
 
 ```java
 private static final String URL = "jdbc:mysql://localhost:3306/tp_p2_pedido_envio?useSSL=false&serverTimezone=UTC";
 private static final String USER = "root";
-private static final String PASSWORD = "TU_PASSWORD_DE_MYSQL";
+private static final String PASSWORD = "TU_PASSWORD";
+```
 
-## 📌 6. Flujo de uso del sistema
+---
 
-Al iniciar se muestra el menú:
-
-1) Crear Pedido (sin envío)
-2) Crear Pedido con Envío (transacción)
-3) Listar todos los pedidos
-4) Buscar pedido por número
-5) Eliminar lógicamente un pedido
+## 📌 6. Flujo de uso del sistema  
+### 🧭 Menú principal
+```
+1) Crear Pedido  
+2) Crear Pedido con Envío (transacción)  
+3) Listar pedidos  
+4) Buscar por número  
+5) Baja lógica  
 0) Salir
+```
 
-# Funciones principales:
+### 🟦 Funciones principales
+- Creación de Pedido  
+- Creación de Pedido + Envío con transacción real  
+- Validaciones  
+- Errores controlados  
+- Búsqueda por número  
+- Baja lógica  
 
-- Creación de pedido
+---
 
-- Creación de pedido+envío con transacción real (commit/rollback)
+## 📌 7. UML del proyecto  
 
-- Búsqueda por número
-
-- Baja lógica
-
-- Validación de duplicados
-
-- Listado general
-
-# Errores controlados:
-
-- Número de pedido duplicado
-
-- Fecha inválida
-
-- ID inexistente en borrado
-
-- Estado incorrecto
-
-## 📌 7. UML del proyecto
-
-El diagrama se encuentra en:
-
+Ubicación:  
+```
 /uml/pedido_envio.png
 /uml/pedido_envio.puml
+```
 
+Incluye: Entidades, atributos, enums y relación 1 → 1.
 
-# Representa:
+---
 
-- Entidades
+## 📌 8. Integrantes del grupo  
+### 👥 Grupo 212 – Comisión 8
 
-- Enums
+| Integrante | Rol |
+|-----------|-----|
+| **Stefan Dios Mayarin** | Coordinador – Menú – QA – Pruebas |
+| **Mathias Flor** | Modelo – Entidades – UML |
+| **Joaquín Villaruel** | Base de Datos – SQL |
+| **Ale Farfán** | DAO – JDBC – Servicios – Transacciones |
 
-- Relación 1 → 1
+---
 
-- Atributos + métodos públicos
+## 📌 9. Video del TPI  
+🎬 https://www.youtube.com/watch?v=ocRj5HeqzsA
 
-## 📌 8. Integrantes del grupo
+---
 
-Grupo 212 – Comisión 8
+## 📌 10. Informe PDF  
+📄 `/documentacion/TPI-Prog2.pdf`
 
-| Integrante          | Rol                                    |
-| ------------------- | -------------------------------------- |
-| Stefan Dios Mayarin | Coordinador – Menú – QA – Pruebas      |
-| Mathias Flor        | Modelo – Entidades – UML               |
-| Joaquín Villaruel   | Base de Datos – Scripts SQL            |
-| Ale Farfán          | DAO – JDBC – Servicios – Transacciones |
+Incluye: dominio, arquitectura, UML, SQL, transacciones, pruebas y conclusiones.
 
-## 📌 9. Video de presentación
+---
 
-Enlace al video explicativo (YouTube):
-👉 [Pendiente de cargar]
-
-## 📌 10. Informe PDF
-
-El informe completo del TPI se encuentra en:
-
-/documentacion/informe_tpi.pdf
-
-# Incluye:
-
-- Justificación del dominio
-
-- Arquitectura por capas
-
-- Modelo UML
-
-- Secuencia transaccional
-
-- Validaciones
-
-- Pruebas capturadas
-
-- Conclusiones
-
-## 📌 11. Licencia
-
-Proyecto académico – UTN – Programación II.
+## 📌 11. Licencia  
+📘 Proyecto académico | UTN–TUPaD | Programación II.
