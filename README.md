@@ -1,7 +1,7 @@
 # TPI – Programación II  
 ## 📦 Sistema Pedido → Envío (Relación 1 → 1)  
 **UTN – Tecnicatura Universitaria en Programación a Distancia**  
-**Comisión 8 – Año 2025**
+**Comisión 8**
 
 ---
 
